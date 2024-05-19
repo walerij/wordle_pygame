@@ -36,4 +36,8 @@ while True:
         sc.blit(s1.text, s1.rect)
         pos += sym_w
     #print(s1.rect.width, s1.rect.height)
+
+    pressed = pygame.key.get_pressed()
+
+
     pygame.display.update()
