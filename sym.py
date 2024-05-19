@@ -6,7 +6,7 @@ class Sym(pygame.sprite.Sprite):
         self.wrong_color = ((0,0,0),(166, 28, 28))
         self.textcolor =self.default_color[0]
         self.bgcolor = self.default_color[1]
-        self.font = pygame.font.SysFont("courier", 72)
+        self.font = pygame.font.SysFont("courier", 42)
         self.text = self.font.render(text, True,  self.textcolor, self.bgcolor)
         self.rect = self.text.get_rect(center=(x, y))
 
