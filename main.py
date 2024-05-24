@@ -38,7 +38,8 @@ while True:
     pos_h = 0
     for i in range(6):
         for j in range(5):
-            s1 = Sym(matrix.text_matr[i][j], W / 3 + pos_w, H / 6+pos_h )
+            #print(matrix.text_matr[i][j])
+            s1 = Sym(matrix.text_matr[i][j][0], W / 3 + pos_w, H / 6+pos_h )
             sc.blit(s1.text, s1.rect)
             pos_w += sym_w
         pos_h += sym_h
@@ -53,14 +54,15 @@ while True:
     
     """
 
-    #print(s1.rect.width, s1.rect.height)
+
 
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_SPACE]:
         s = []
         for i in curr_game.quest:
-            s.append(i)
-        matrix.text_matr[0] = s
+            s.append([i,''])
+
+        matrix.text_matr[0]= s
 
 
 

@@ -8,6 +8,6 @@ class Matrix():
         self.color_matr = []
         self.i=0
         while self.i < self.x:
-            self.text_matr.append([" "," "," "," "," "])
-            self.color_matr.append(["default", "default", "default", "default", "default"])
+            self.text_matr.append([[' ',' '],[' ',' '],[' ',' '],[' ',' '],[' ',' ']])
+            #self.color_matr.append(["default", "default", "default", "default", "default"])
             self.i=self.i+1
