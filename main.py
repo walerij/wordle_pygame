@@ -39,7 +39,7 @@ while True:
     for i in range(6):
         for j in range(5):
             #print(matrix.text_matr[i][j])
-            s1 = Sym(matrix.text_matr[i][j][0], W / 3 + pos_w, H / 6+pos_h )
+            s1 = Sym(matrix.text_matr[i][j][0], W / 3 + pos_w, H / 6+pos_h, matrix.text_matr[i][j][1] )
             sc.blit(s1.text, s1.rect)
             pos_w += sym_w
         pos_h += sym_h
@@ -58,11 +58,14 @@ while True:
 
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_SPACE]:
+        print(curr_game.quest)
         s = []
-        for i in curr_game.quest:
-            s.append([i,''])
+        word = 'пират'
+        s=curr_game.check(word)
 
         matrix.text_matr[0]= s
+
+    pressed = pygame.key.get_pressed()
 
 
 
