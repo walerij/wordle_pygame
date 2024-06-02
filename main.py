@@ -1,5 +1,6 @@
-import pygame
+import pygame, pygame_widgets
 
+from pygame_widgets.button import ButtonArray
 
 pygame.init()
 
@@ -23,10 +24,88 @@ from matrix import Matrix
 
 matrix = Matrix()
 
+#кнопки алфавита
+alf = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+
+textList = []
+clickList = []
+
+def get_b(s):
+    print(s)
+
+
+for i in alf:
+    #print(i)
+    textList.append(i)
+    tmp=str(i)
+    #clickList.append(lambda: get_b(tmp))
+
+
+
+
+
+click_= (
+lambda: get_b("a"),
+lambda: get_b("б"),
+lambda: get_b("в"),
+lambda: get_b("г"),
+lambda: get_b("д"),
+lambda: get_b("е"),
+lambda: get_b("ё"),
+lambda: get_b("ж"),
+lambda: get_b("з"),
+lambda: get_b("и"),
+lambda: get_b("й"),
+lambda: get_b("к"),
+lambda: get_b("л"),
+lambda: get_b("м"),
+lambda: get_b("н"),
+lambda: get_b("о"),
+lambda: get_b("п"),
+lambda: get_b("р"),
+lambda: get_b("с"),
+lambda: get_b("т"),
+lambda: get_b("у"),
+lambda: get_b("ф"),
+lambda: get_b("х"),
+lambda: get_b("ц"),
+lambda: get_b("ч"),
+lambda: get_b("ш"),
+lambda: get_b("щ"),
+lambda: get_b("ъ"),
+lambda: get_b("ы"),
+lambda: get_b("ь"),
+lambda: get_b("э"),
+lambda: get_b("ю"),
+lambda: get_b("я"),
+
+)
+text_ = tuple(textList)
+#click_ = tuple(clickList)
+
+
+
+buttonArray  = ButtonArray(
+    sc,
+    50,  # X-coordinate
+    500,  # Y-coordinate
+    400,  # Width
+    200,  # Height
+    (11, 3),  # Shape: 2 buttons wide, 2 buttons tall
+    border=2,  # Distance between buttons and edge of array
+    texts=text_,  # Sets the texts of each button (counts left to right then top to bottom)
+    # When clicked, print number
+    onClicks= click_
+
+
+)
+
 
 
 while True:
-    for event in pygame.event.get():
+
+    events = pygame.event.get()
+    for event in events:
         if event.type == pygame.QUIT:
             quit()
 
@@ -67,6 +146,6 @@ while True:
 
     pressed = pygame.key.get_pressed()
 
-
+    pygame_widgets.update(events)
 
     pygame.display.update()
