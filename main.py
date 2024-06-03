@@ -29,16 +29,26 @@ alf = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
 
 textList = []
 clickList = []
+word =''
+s = [[' ',''],[' ',''],[' ',''],[' ',''],[' ','']]
 
-def get_b(s):
-    print(s)
+level = 0
+wordpos = 0
+
+def get_b(ss):
+    #print(ss)
+    global word
+    global wordpos
+    s[wordpos][0] = ss
+    matrix.text_matr[level] = s
+    word+=ss
+    wordpos+=1
 
 
 for i in alf:
-    #print(i)
     textList.append(i)
     tmp=str(i)
-    #clickList.append(lambda: get_b(tmp))
+
 
 
 
