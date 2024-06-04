@@ -1,6 +1,6 @@
 import pygame, pygame_widgets
 
-from pygame_widgets.button import ButtonArray
+from pygame_widgets.button import ButtonArray, Button
 
 pygame.init()
 
@@ -39,10 +39,31 @@ def get_b(ss):
     #print(ss)
     global word
     global wordpos
-    s[wordpos][0] = ss
-    matrix.text_matr[level] = s
-    word+=ss
-    wordpos+=1
+    global s
+    if (wordpos <= 4):
+        s[wordpos][0] = ss
+        matrix.text_matr[level] = s
+        word+=ss
+        wordpos+=1
+
+
+
+def submit_check():
+    global word
+    global wordpos
+    global level
+    global s
+    if (wordpos>4):
+        print(curr_game.quest)
+
+        testlist=curr_game.check(word)
+
+        print(testlist)
+        matrix.text_matr[level]= testlist
+        level+=1
+        wordpos=0
+        s = [[' ',''],[' ',''],[' ',''],[' ',''],[' ','']]
+        word = ""
 
 
 for i in alf:
@@ -55,7 +76,7 @@ for i in alf:
 
 
 click_= (
-lambda: get_b("a"),
+lambda: get_b("а"),
 lambda: get_b("б"),
 lambda: get_b("в"),
 lambda: get_b("г"),
@@ -107,6 +128,13 @@ buttonArray  = ButtonArray(
     # When clicked, print number
     onClicks= click_
 
+
+)
+
+btnSub = Button(
+    sc, 50, 710, 200, 20,
+    text="Отправить",
+    onClick=submit_check,
 
 )
 
