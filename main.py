@@ -65,6 +65,20 @@ def submit_check():
         s = [[' ',''],[' ',''],[' ',''],[' ',''],[' ','']]
         word = ""
 
+def bksps():
+    global word
+    global wordpos
+    global level
+    global s
+    if (wordpos > 0):
+        wordpos -= 1
+        s[wordpos][0] = ' '
+        #print(s)
+        matrix.text_matr[level] = s
+        word=word[0: len(word)-1]
+
+
+
 
 for i in alf:
     textList.append(i)
@@ -138,6 +152,13 @@ btnSub = Button(
 
 )
 
+btnBksps = Button(
+    sc, 260, 710, 200, 20,
+    text="<<<<",
+    onClick=bksps,
+
+)
+
 
 
 while True:
@@ -173,14 +194,7 @@ while True:
 
 
 
-    pressed = pygame.key.get_pressed()
-    if pressed[pygame.K_SPACE]:
-        print(curr_game.quest)
-        s = []
-        word = 'пират'
-        s=curr_game.check(word)
 
-        matrix.text_matr[0]= s
 
     pressed = pygame.key.get_pressed()
 
