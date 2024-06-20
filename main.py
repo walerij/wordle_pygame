@@ -1,5 +1,8 @@
 import pygame, pygame_widgets
 
+from tkinter import *
+from tkinter import messagebox
+
 from pygame_widgets.button import ButtonArray, Button
 
 pygame.init()
@@ -13,7 +16,7 @@ pygame.display.set_caption("Wordle")
 
 from game import Game
 
-curr_game=Game()
+
 
 from sym import Sym
 
@@ -22,18 +25,25 @@ s1 = None
 
 from matrix import Matrix
 
-matrix = Matrix()
 
-#кнопки алфавита
-alf = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+def game_init():
+    global curr_game, alf, s1, matrix, textList, word, s, level, wordpos
+    curr_game = Game()
+    alf = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+    s1 = None
+    matrix = Matrix()
+    # кнопки алфавита
+    textList = []
+    clickList = []
+    word = ''
+    s = [[' ', ''], [' ', ''], [' ', ''], [' ', ''], [' ', '']]
+    level = 0
+    wordpos = 0
 
-textList = []
-clickList = []
-word =''
-s = [[' ',''],[' ',''],[' ',''],[' ',''],[' ','']]
 
-level = 0
-wordpos = 0
+
+game_init()
+
 
 def get_b(ss):
     #print(ss)
@@ -54,16 +64,30 @@ def submit_check():
     global level
     global s
     if (wordpos>4):
-        print(curr_game.quest)
+        if level>=5:
+            btnBksps.hide()
+            btnSub.hide()
+            messagebox.showinfo(title='Поражение!', message='Вы использовали все попытки! Вы проиграли! Загаданное слово - '+curr_game.quest)
+            btnNew.show()
+        #print(curr_game.quest)
 
         testlist=curr_game.check(word)
 
         print(testlist)
         matrix.text_matr[level]= testlist
+
+
         level+=1
+
         wordpos=0
         s = [[' ',''],[' ',''],[' ',''],[' ',''],[' ','']]
         word = ""
+        if curr_game.win=='user':
+            btnBksps.hide()
+            btnSub.hide()
+            messagebox.showinfo(title='Ура! Победа!', message='Игра окончена! Вы победили!')
+
+            btnNew.show()
 
 def bksps():
     global word
@@ -76,6 +100,7 @@ def bksps():
         #print(s)
         matrix.text_matr[level] = s
         word=word[0: len(word)-1]
+
 
 
 
@@ -159,6 +184,21 @@ btnBksps = Button(
 
 )
 
+def btnnew_click():
+    game_init()
+    btnSub.show()
+    btnBksps.show()
+    btnNew.hide()
+
+btnNew = Button(
+    sc, 50, 710, 200, 20,
+    text="Новая игра",
+    onClick=btnnew_click,
+
+)
+btnNew.hide()
+
+
 
 
 while True:
@@ -180,6 +220,7 @@ while True:
             s1 = Sym(matrix.text_matr[i][j][0], W / 3 + pos_w, H / 6+pos_h, matrix.text_matr[i][j][1] )
             sc.blit(s1.text, s1.rect)
             pos_w += sym_w
+
         pos_h += sym_h
         pos_w = 0
 
